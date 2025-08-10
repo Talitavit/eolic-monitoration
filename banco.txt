@@ -1,0 +1,35 @@
+pip install                      
+
+pip install -r requirements.txt 
+
+cd src / py producer.py    
+
+docker build logstash  
+
+docker compose up -d     
+--------------------------------------------------------------------------
+docker exec -it influxdb influx -username admin -password password
+
+CREATE DATABASE "eolic-data";
+
+CREATE USER "logstash" WITH PASSWORD 'logstash123';
+
+GRANT ALL ON "eolic-data" TO "logstash";
+
+SHOW DATABASES;
+
+USE eolic-data;
+
+SHOW MEASUREMENTS; 
+
+select * from turbine_sensors;
+--------------------------------------------------------------------------
+grafana= admin/admin123
+
+URL: http://influxdb:8086
+Access: Server (default)
+Database: eolic-data
+User: logstash
+Password: logstash123
+
+SELECT "wind_speed" FROM "turbine_sensors"
