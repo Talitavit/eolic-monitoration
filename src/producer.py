@@ -4,15 +4,12 @@ import random
 from datetime import datetime
 from kafka import KafkaProducer
 
-# Configurações do Kafka
 KAFKA_BROKER = 'localhost:9092'
 KAFKA_TOPIC = 'turbine-data'
 
-# Número de turbinas eólicas para simular
 NUM_TURBINES = 10
 
 def create_producer():
-    """Cria e retorna um produtor Kafka."""
     try:
         producer = KafkaProducer(
             bootstrap_servers=[KAFKA_BROKER],
@@ -29,15 +26,14 @@ def generate_sensor_data(turbine_id):
     return {
         'turbine_id': f'T{turbine_id:03d}',
         'timestamp': datetime.now().isoformat(),
-        'wind_speed': round(random.uniform(0, 100), 2),  # km/h
-        'rpm': round(random.uniform(0, 20), 2),  # Rotações por minuto
-        'power_output': round(random.uniform(0, 2.5), 4),  # MW
-        'vibration': round(random.uniform(0, 1.5), 4), # Nível de vibração
-        'temperature': round(random.uniform(-10, 40), 2) # Celsius
+        'wind_speed': round(random.uniform(0, 100), 2),
+        'rpm': round(random.uniform(0, 20), 2),
+        'power_output': round(random.uniform(0, 2.5), 4), 
+        'vibration': round(random.uniform(0, 1.5), 4),
+        'temperature': round(random.uniform(-10, 40), 2) 
     }
 
 def main():
-    """Função principal para gerar e enviar dados."""
     producer = create_producer()
     if not producer:
         return
@@ -56,7 +52,6 @@ def main():
 
             
             producer.flush()
-            # Espera 5 segundos antes de gerar o próximo lote de dados
             time.sleep(5)
             
     except KeyboardInterrupt:

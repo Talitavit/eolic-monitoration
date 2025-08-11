@@ -23,6 +23,8 @@ USE eolic-data;
 SHOW MEASUREMENTS; 
 
 select * from turbine_sensors;
+
+SHOW FIELD KEYS FROM "turbine_sensors"
 --------------------------------------------------------------------------
 grafana= admin/admin123
 
@@ -33,3 +35,6 @@ User: logstash
 Password: logstash123
 
 SELECT "wind_speed" FROM "turbine_sensors"
+
+SELECT mean("wind_speed") FROM "turbine_sensors" WHERE $timeFilter GROUP BY time($__interval) fill(null)
+

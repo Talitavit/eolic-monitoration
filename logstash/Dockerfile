@@ -7,8 +7,5 @@ WORKDIR /usr/share/logstash
 # Instale o plugin do Logstash para o InfluxDB
 RUN bin/logstash-plugin install logstash-output-influxdb
 
-# Instale o plugin do Logstash para o InfluxDB HTTP
-# RUN bin/logstash-plugin install logstash-output-influxdb_http
-
 # Copie o arquivo de configuração do Logstash para o contêiner
 COPY pipeline/logstash.conf /usr/share/logstash/pipeline/logstash.conf
